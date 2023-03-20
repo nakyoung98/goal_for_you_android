@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/logo"
+        android:enabled="true"
+        android:icon="@drawable/logo"
+        android:title="@string/app_icon_label"/>
+
+    <item
+        android:id="@+id/calender"
+        android:enabled="true"
+        android:icon="@drawable/calender"
+        android:title="@string/calender_destination_label"/>
+
+    <item
+        android:id="@+id/ongoing"
+        android:enabled="true"
+        android:icon="@drawable/ongoing"
+        android:title="@string/ongoing_destination_label"/>
+
+    <item
+        android:id="@+id/complete"
+        android:enabled="true"
+        android:icon="@drawable/complete"
+        android:title="@string/complete_destination_label"/>
+
+    <item
+        android:id="@+id/setting"
+        android:enabled="true"
+        android:icon="@drawable/setting"
+        android:title="@string/setting_destination_label"/>
+
+
+</menu>
