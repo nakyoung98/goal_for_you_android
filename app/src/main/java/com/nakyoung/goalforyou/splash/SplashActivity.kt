@@ -22,6 +22,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        login()
     }
 
     override fun onStart() {
@@ -37,7 +38,6 @@ class SplashActivity : AppCompatActivity() {
 
     fun login() {
 //TODO 자동 login 기능 구현
-
         //임시 로그인 코드
         startActivity(Intent(this,MainActivity::class.java).apply {
             putExtra("user","test1@goalforyou.com")
