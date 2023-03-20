@@ -1,5 +1,6 @@
 package com.nakyoung.goalforyou.splash
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.nakyoung.goalforyou.R
 import com.nakyoung.goalforyou.databinding.ActivitySplashBinding
+import com.nakyoung.goalforyou.main.MainActivity
 
 class SplashActivity : AppCompatActivity() {
 
@@ -31,5 +33,14 @@ class SplashActivity : AppCompatActivity() {
         binding.title.animation = AnimationUtils.loadAnimation(this, R.anim.anim_text_fadein)
         binding.title.isVisible = true
         binding.title.startAnimation(binding.title.animation)
+    }
+
+    fun login() {
+//TODO 자동 login 기능 구현
+
+        //임시 로그인 코드
+        startActivity(Intent(this,MainActivity::class.java).apply {
+            putExtra("user","test1@goalforyou.com")
+        })
     }
 }
