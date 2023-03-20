@@ -5,7 +5,9 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.onNavDestinationSelected
+import androidx.navigation.ui.setupWithNavController
 import com.nakyoung.goalforyou.R
 import com.nakyoung.goalforyou.databinding.ActivityMainBinding
 
@@ -17,6 +19,7 @@ class MainActivity: AppCompatActivity() {
 
     private lateinit var navHostFragment:NavHostFragment
     private lateinit var navController: NavController
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,10 +31,13 @@ class MainActivity: AppCompatActivity() {
 
     private fun setNavHost() {
         navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+        binding.navigationRailView.setupWithNavController(navController)
+        navController.setGraph(R.navigation.nav_graph_main)
+        appBarConfiguration = AppBarConfiguration(navController.graph, binding.root)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        navController = navHostFragment.navController
-        return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
+        return item.onNavDestinationSelected(navController)
     }
 }
