@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_main"
+    app:startDestination="@id/calenderFragment">
+    
+    <fragment
+        android:id="@+id/calenderFragment"
+        android:name="com.nakyoung.goalforyou.calender.CalenderFragment"
+        android:label="CalenderFragment" >
+        <action
+            android:id="@+id/action_calenderFragment_to_ongoingFragment"
+            app:destination="@id/ongoingFragment" />
+        <action
+            android:id="@+id/action_calenderFragment_to_completeFragment"
+            app:destination="@id/completeFragment" />
+        <action
+            android:id="@+id/action_calenderFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ongoingFragment"
+        android:name="com.nakyoung.goalforyou.ongoing.OngoingFragment"
+        android:label="OngoingFragment" >
+        <action
+            android:id="@+id/action_ongoingFragment_to_completeFragment"
+            app:destination="@id/completeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/completeFragment"
+        android:name="com.nakyoung.goalforyou.complete.CompleteFragment"
+        android:label="CompleteFragment" >
+        <action
+            android:id="@+id/action_completeFragment_to_ongoingFragment"
+            app:destination="@id/ongoingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.nakyoung.goalforyou.setting.SettingFragment"
+        android:label="SettingFragment" />
+
+</navigation>
