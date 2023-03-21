@@ -19,7 +19,6 @@ class MainActivity: AppCompatActivity() {
 
     private lateinit var navHostFragment:NavHostFragment
     private lateinit var navController: NavController
-    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +33,6 @@ class MainActivity: AppCompatActivity() {
         navController = navHostFragment.navController
         binding.navigationRailView.setupWithNavController(navController)
         navController.setGraph(R.navigation.nav_graph_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph, binding.root)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
