@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CalenderDateCardView">
+        <attr name="dateText" format="integer"/>
+        <attr name="backgroudColor" format="reference|color"/>
+        <attr name="strokeColor" format="reference|color"/>
+        <attr name="roundedCornerRadius" format="reference|dimension"/>
+        <attr name="firstGoalColor" format="reference|color"/>
+        <attr name="secondGoalColor" format="reference|color" />
+        <attr name="thirdGoalColor" format="reference|color" />
+    </declare-styleable>
+</resources>
