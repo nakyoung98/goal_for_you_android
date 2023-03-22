@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="CalenderDateCardView">
+    <declare-styleable name="CalenderDateCardview">
         <attr name="dateText" format="integer"/>
+        <attr name="datePosition" format="enum">
+            <enum name="start" value="0"/>
+            <enum name="center" value="0.5" />
+            <enum name="end" value="1"/>
+        </attr>
         <attr name="backgroudColor" format="reference|color"/>
         <attr name="strokeColor" format="reference|color"/>
         <attr name="roundedCornerRadius" format="reference|dimension"/>
