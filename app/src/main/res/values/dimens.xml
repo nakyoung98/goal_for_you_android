@@ -6,7 +6,10 @@
     <dimen name="margin_large">64dp</dimen>
     <dimen name="margin_xlarge">96dp</dimen>
 
+<!--    Custom calenderDateCardview 값 정리-->
     <dimen name="date_cardview_corner">4dp</dimen>
     <dimen name="date_cardview_elevation">1dp</dimen>
     <dimen name="date_cardview_item_margin">0.5dp</dimen>
+    <dimen name="date_cardview_width">@dimen/margin_large</dimen>
+    <dimen name="date_cardview_height">@dimen/margin_xlarge</dimen>
 </resources>
