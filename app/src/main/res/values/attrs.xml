@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="CalenderDateCardview">
-        <attr name="dateText" format="integer"/>
+        <attr name="date" format="integer"/>
+        <attr name="dateColor" format="reference|color"/>
         <attr name="datePosition" format="enum">
-            <enum name="start" value="0"/>
-            <enum name="center" value="0.5" />
-            <enum name="end" value="1"/>
+            <enum name="start" value="8388611"/>
+            <enum name="center" value="1" />
+            <enum name="end" value="8388613"/>
         </attr>
-        <attr name="backgroudColor" format="reference|color"/>
+        <attr name="dateBackgroundColor" format="reference|color"/>
         <attr name="strokeColor" format="reference|color"/>
         <attr name="roundedCornerRadius" format="reference|dimension"/>
         <attr name="firstGoalColor" format="reference|color"/>
         <attr name="secondGoalColor" format="reference|color" />
         <attr name="thirdGoalColor" format="reference|color" />
     </declare-styleable>
+
 </resources>
