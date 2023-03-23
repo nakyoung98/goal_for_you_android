@@ -26,33 +26,39 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             tools:text="1" />
 
-        <View
+        <TextView
             android:id="@+id/third_goal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/date_cardview_item_margin"
             android:layout_marginBottom="@dimen/date_cardview_item_margin"
             android:layout_weight="1"
+            android:gravity="center_vertical"
             android:background="@drawable/calender_date_goal_square"
+            android:maxLines="1"
             android:visibility="invisible" />
 
-        <View
+        <TextView
             android:id="@+id/second_goal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/date_cardview_item_margin"
             android:layout_marginBottom="@dimen/date_cardview_item_margin"
             android:layout_weight="1"
+            android:gravity="center_vertical"
             android:background="@drawable/calender_date_goal_square"
+            android:maxLines="1"
             android:visibility="invisible" />
 
-        <View
+        <TextView
             android:id="@+id/first_goal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/date_cardview_item_margin"
             android:layout_weight="1"
             android:background="@drawable/calender_date_goal_square"
+            android:gravity="center_vertical"
+            android:maxLines="1"
             android:visibility="invisible" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
