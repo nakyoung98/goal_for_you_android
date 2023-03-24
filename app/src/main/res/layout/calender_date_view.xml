@@ -35,8 +35,12 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:background="@drawable/calender_date_goal_square"
+            android:backgroundTint="@color/default_third_goal_background_color"
             android:maxLines="1"
-            android:visibility="invisible" />
+            android:textColor="@color/default_goal_text_color"
+            android:visibility="invisible"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp"/>
 
         <TextView
             android:id="@+id/second_goal"
@@ -47,8 +51,12 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:background="@drawable/calender_date_goal_square"
+            android:backgroundTint="@color/default_second_goal_background_color"
             android:maxLines="1"
-            android:visibility="invisible" />
+            android:textColor="@color/default_goal_text_color"
+            android:visibility="invisible"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp"/>
 
         <TextView
             android:id="@+id/first_goal"
@@ -57,8 +65,12 @@
             android:layout_marginTop="@dimen/date_cardview_item_margin"
             android:layout_weight="1"
             android:background="@drawable/calender_date_goal_square"
+            android:backgroundTint="@color/default_first_goal_background_color"
             android:gravity="center_vertical"
             android:maxLines="1"
-            android:visibility="invisible" />
+            android:textColor="@color/default_goal_text_color"
+            android:visibility="invisible"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp"/>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
