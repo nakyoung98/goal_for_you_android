@@ -12,4 +12,5 @@
     <dimen name="date_cardview_item_margin">0.5dp</dimen>
     <dimen name="date_cardview_width">@dimen/margin_large</dimen>
     <dimen name="date_cardview_height">@dimen/margin_xlarge</dimen>
+    <dimen name="calender_corner">16dp</dimen>
 </resources>
