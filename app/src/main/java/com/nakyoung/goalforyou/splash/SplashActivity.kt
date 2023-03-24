@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import com.nakyoung.goalforyou.R
 import com.nakyoung.goalforyou.databinding.ActivitySplashBinding
 import com.nakyoung.goalforyou.main.MainActivity
+import com.nakyoung.goalforyou.view.GoalIndex
 
 class SplashActivity : AppCompatActivity() {
 
@@ -21,6 +22,8 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivitySplashBinding.inflate(layoutInflater)
+
+        binding.view.addGoal(GoalIndex.SECOND,"이게 진짜지dfqdfadfadf")
         setContentView(binding.root)
         login()
     }
@@ -39,8 +42,8 @@ class SplashActivity : AppCompatActivity() {
     fun login() {
 //TODO 자동 login 기능 구현
         //임시 로그인 코드
-        startActivity(Intent(this,MainActivity::class.java).apply {
-            putExtra("user","test1@goalforyou.com")
-        })
+//        startActivity(Intent(this,MainActivity::class.java).apply {
+//            putExtra("user","test1@goalforyou.com")
+//        })
     }
 }
