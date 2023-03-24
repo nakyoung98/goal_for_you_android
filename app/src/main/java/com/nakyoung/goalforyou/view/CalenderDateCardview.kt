@@ -2,6 +2,7 @@ package com.nakyoung.goalforyou.view
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.Log
 import android.view.Gravity
@@ -22,7 +23,8 @@ import com.nakyoung.goalforyou.databinding.CalenderDateViewBinding
 enum class GoalIndex {
     FIRST,
     SECOND,
-    THIRD
+    THIRD,
+    NONE;
 }
 
 class CalenderDateCardview(context: Context, attrs: AttributeSet) : CardView(context, attrs) {
@@ -96,8 +98,7 @@ class CalenderDateCardview(context: Context, attrs: AttributeSet) : CardView(con
             field = value
         }
 
-    private val goals: Array<TextView> = arrayOf(binding.firstGoal, binding.secondGoal, binding.thirdGoal)
-
+    val goals: List<TextView> = listOf(binding.firstGoal, binding.secondGoal, binding.thirdGoal)
 
     init {
         context.theme.obtainStyledAttributes(
@@ -124,17 +125,11 @@ class CalenderDateCardview(context: Context, attrs: AttributeSet) : CardView(con
 
     //TODO 추후에 goal을 객체로 바꿔야함
     fun addGoal(goalIndex: GoalIndex, goal: String) {
-        goals[goalIndex.ordinal].text = goal
-        goals[goalIndex.ordinal].isVisible = true
+        if (!goals[goalIndex.ordinal].isVisible) {
+            goals[goalIndex.ordinal].text = goal
+            goals[goalIndex.ordinal].isVisible = true
+        }
+        //TODO else의 경우 어떻게 처리?
     }
-
-    fun setGoalAttribute(goalIndex: GoalIndex, goalAttribute: GoalAttribute) {
-
-    }
-
 }
 
-data class GoalAttribute(
-    val textColor: Int = Color.BLACK,
-    val background: Int = Color.parseColor("#")
-)
