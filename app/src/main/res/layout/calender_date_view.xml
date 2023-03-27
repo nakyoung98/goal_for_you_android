@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.nakyoung.goalforyou.view.CalenderDateCardview xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/calender_date_cardview"
@@ -7,7 +7,8 @@
     android:layout_height="@dimen/date_cardview_height"
     android:clickable="true"
     app:cardCornerRadius="@dimen/date_cardview_corner"
-    app:cardElevation="@dimen/date_cardview_elevation">
+    app:cardElevation="@dimen/date_cardview_elevation"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +24,7 @@
             android:layout_weight="1"
             android:gravity="start|top"
             android:text="TextView"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
             tools:text="1" />
 
         <TextView
@@ -40,7 +41,8 @@
             android:textColor="@color/default_goal_text_color"
             android:visibility="invisible"
             android:paddingStart="2dp"
-            android:paddingEnd="2dp"/>
+            android:paddingEnd="2dp"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"/>
 
         <TextView
             android:id="@+id/second_goal"
@@ -56,7 +58,8 @@
             android:textColor="@color/default_goal_text_color"
             android:visibility="invisible"
             android:paddingStart="2dp"
-            android:paddingEnd="2dp"/>
+            android:paddingEnd="2dp"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"/>
 
         <TextView
             android:id="@+id/first_goal"
@@ -71,6 +74,7 @@
             android:textColor="@color/default_goal_text_color"
             android:visibility="invisible"
             android:paddingStart="2dp"
-            android:paddingEnd="2dp"/>
+            android:paddingEnd="2dp"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"/>
     </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
+</com.nakyoung.goalforyou.view.CalenderDateCardview>
