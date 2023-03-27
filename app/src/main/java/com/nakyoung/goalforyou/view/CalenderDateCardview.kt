@@ -10,7 +10,9 @@ import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
+import com.google.android.material.card.MaterialCardView
 import com.nakyoung.goalforyou.R
+import com.nakyoung.goalforyou.database.domain.Goal
 import com.nakyoung.goalforyou.databinding.CalenderDateViewBinding
 
 /**
@@ -23,16 +25,21 @@ import com.nakyoung.goalforyou.databinding.CalenderDateViewBinding
 enum class GoalIndex {
     FIRST,
     SECOND,
-    THIRD,
-    NONE;
+    THIRD;
+}
+fun intToGoal(int: Int): GoalIndex {
+    return when (int) {
+        GoalIndex.FIRST.ordinal -> GoalIndex.FIRST
+        GoalIndex.SECOND.ordinal -> GoalIndex.SECOND
+        GoalIndex.THIRD.ordinal -> GoalIndex.THIRD
+        else -> throw EnumConstantNotPresentException(GoalIndex::class.java, int.toString())
+    }
 }
 
-class CalenderDateCardview(context: Context, attrs: AttributeSet) : CardView(context, attrs) {
+class CalenderDateCardview(context: Context, attrs: AttributeSet?) : MaterialCardView(context, attrs) {
 
     private val binding: CalenderDateViewBinding by lazy {
-        CalenderDateViewBinding.bind(
-            LayoutInflater.from(context).inflate(R.layout.calender_date_view, this, false)
-        )
+        CalenderDateViewBinding.inflate(LayoutInflater.from(context))
     }
 
     var date: Int = 0
@@ -68,12 +75,6 @@ class CalenderDateCardview(context: Context, attrs: AttributeSet) : CardView(con
             field = value
         }
 
-    var strokeColor: Int = Color.DKGRAY
-        set(value) {
-            binding.calenderDateCardview.strokeColor = value
-            field = value
-        }
-
     var roundedCornerRadius: Float = 0f
         set(value) {
             binding.calenderDateCardview.radius = value
@@ -98,7 +99,7 @@ class CalenderDateCardview(context: Context, attrs: AttributeSet) : CardView(con
             field = value
         }
 
-    val goals: List<TextView> = listOf(binding.firstGoal, binding.secondGoal, binding.thirdGoal)
+    val goals: List<TextView> by lazy { listOf(binding.firstGoal, binding.secondGoal, binding.thirdGoal) }
 
     init {
         context.theme.obtainStyledAttributes(
@@ -124,12 +125,17 @@ class CalenderDateCardview(context: Context, attrs: AttributeSet) : CardView(con
     }
 
     //TODO 추후에 goal을 객체로 바꿔야함
-    fun addGoal(goalIndex: GoalIndex, goal: String) {
+    fun addGoal(goalIndex: GoalIndex, goal: Goal) {
         if (!goals[goalIndex.ordinal].isVisible) {
-            goals[goalIndex.ordinal].text = goal
+            goals[goalIndex.ordinal].text = goal.goalContent
             goals[goalIndex.ordinal].isVisible = true
         }
         //TODO else의 경우 어떻게 처리?
+    }
+
+    fun addGoal(goals: List<Goal>) {
+        for((index,goal) in goals.withIndex())
+            addGoal(intToGoal(index), goal)
     }
 }
 
