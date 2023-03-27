@@ -2,6 +2,7 @@ package com.nakyoung.goalforyou.calender
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.nakyoung.goalforyou.database.domain.Goal
 import com.nakyoung.goalforyou.database.domain.goalsFromUser
 import java.time.LocalDate
@@ -10,16 +11,20 @@ import java.time.Month
 class CalenderViewModel : ViewModel() {
     private val goals = goalsFromUser
 
-    private val today = LocalDate.now()
+    private val today = LocalDate.now().apply {
+        Log.i("CalenderViewModel",this.toString())
+    }
 
     private val Month: Month by lazy {
         today.month
     }
     private val dayOfMonth: Int by lazy {
-        today.dayOfMonth
+        today.month.length(
+            today.isLeapYear
+        )
     }
 
-    private val days: List<Day> by lazy {
+    val days: List<Day> by lazy {
 
         List<Day>(dayOfMonth) {
             //해당 날짜의 goal 담고
@@ -43,4 +48,14 @@ class CalenderViewModel : ViewModel() {
         }
     }
 
+}
+
+class CalenderViewModelFactory(): ViewModelProvider.Factory{
+    override fun <T:ViewModel> create(modelClass: Class<T>):T{
+        if(modelClass.isAssignableFrom(CalenderViewModel::class.java)){
+            @Suppress("UNCHECKED_CAST")
+            return CalenderViewModel() as T
+        }
+        throw IllegalArgumentException("UNKNOWN VIEW MODEL CLASS")
+    }
 }
