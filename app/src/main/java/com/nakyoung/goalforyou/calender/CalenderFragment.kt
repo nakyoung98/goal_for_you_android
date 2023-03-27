@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.nakyoung.goalforyou.R
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import com.nakyoung.goalforyou.databinding.FragmentCalenderBinding
+import kotlinx.coroutines.launch
 
 class CalenderFragment : Fragment() {
 
@@ -22,13 +24,18 @@ class CalenderFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCalenderBinding.inflate(inflater,container,false)
+
+
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this)[CalenderViewModel::class.java]
-        // TODO: Use the ViewModel
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel = CalenderViewModelFactory().create(CalenderViewModel::class.java)
+            binding.calenderView.calender.adapter = CalendarViewAdapter(viewModel.days)
+            binding.calenderView.calender.layoutManager = GridLayoutManager(requireContext(), 7)
+        }
+    }
 }
