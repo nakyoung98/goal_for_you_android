@@ -34,7 +34,7 @@ class CalendarViewAdapter(val days: List<Day>) :
 
     init {
         val today = LocalDate.now()
-        val dayOfMonth = today.dayOfMonth
+        val dayOfMonth = today.month.length(today.isLeapYear)
         val firstDayOfWeek = LocalDate.of(today.year,today.month,1).dayOfWeek
 
         //startCount Initial
@@ -58,10 +58,9 @@ class CalendarViewAdapter(val days: List<Day>) :
 
     /* Inflates view and returns HeaderViewHolder. */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalenderViewHolder {
-        val view = CalenderDateCardview(parent.context, null)
+        val view = CalenderDateCardview(parent.context)
 //        val view = CalenderDateCardview(parent.context,)
         //TODO attr 받아오도록 ViewAdapter에 생성자 파라미터 추가해야함
-
         return CalenderViewHolder(view)
     }
 
