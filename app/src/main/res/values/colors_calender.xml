@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="default_goal_text_color">#334557</color>
-    <color name="default_date_background">#f4f0e6</color>
-    <color name="default_first_goal_background_color">#d9d9f3</color>
-    <color name="default_second_goal_background_color">#ceefe4</color>
-    <color name="default_third_goal_background_color">#9dd3a8</color>
-    <color name="default_stroke_color">#f1ede3</color>
-</resources>
