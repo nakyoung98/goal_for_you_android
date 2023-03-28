@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:padding="@dimen/margin_small"
     android:background="@drawable/calender_date_goal_square"
-    android:backgroundTint="@color/default_date_background">
+    android:backgroundTint="@color/calender_background">
 
     <TextView
         android:id="@+id/year"
@@ -56,7 +56,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/day_view" >
+        app:layout_constraintTop_toBottomOf="@+id/day_view">
 
     </androidx.recyclerview.widget.RecyclerView>
 

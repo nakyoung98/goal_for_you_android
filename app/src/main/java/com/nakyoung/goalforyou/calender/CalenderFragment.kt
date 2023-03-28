@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.nakyoung.goalforyou.databinding.FragmentCalenderBinding
 import kotlinx.coroutines.launch
 
@@ -25,6 +26,7 @@ class CalenderFragment : Fragment() {
     ): View? {
         binding = FragmentCalenderBinding.inflate(inflater,container,false)
 
+        binding.calenderView.calender.layoutManager = GridLayoutManager(requireContext(), 7)
 
         return binding.root
     }
@@ -35,7 +37,6 @@ class CalenderFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel = CalenderViewModelFactory().create(CalenderViewModel::class.java)
             binding.calenderView.calender.adapter = CalendarViewAdapter(viewModel.days)
-            binding.calenderView.calender.layoutManager = GridLayoutManager(requireContext(), 7)
         }
     }
 }

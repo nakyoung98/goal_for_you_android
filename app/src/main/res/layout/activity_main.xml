@@ -23,10 +23,10 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        app:menu="@menu/navigation_rail_menu"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:menuGravity="bottom"
-        />
+        app:menu="@menu/navigation_rail_menu"
+        app:menuGravity="bottom" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
