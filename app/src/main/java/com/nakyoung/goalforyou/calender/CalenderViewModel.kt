@@ -8,7 +8,15 @@ import com.nakyoung.goalforyou.database.domain.goalsFromUser
 import java.time.LocalDate
 import java.time.Month
 
-class CalenderViewModel : ViewModel() {
+class CalenderViewModel
+    private constructor()
+    : ViewModel() {
+
+    companion object {
+        val viewModel: CalenderViewModel? = null
+        fun getInstance() = if (viewModel == null) CalenderViewModel() else viewModel
+    }
+
     private val goals = goalsFromUser
 
     private val today = LocalDate.now().apply {
@@ -51,10 +59,13 @@ class CalenderViewModel : ViewModel() {
 }
 
 class CalenderViewModelFactory(): ViewModelProvider.Factory{
+
     override fun <T:ViewModel> create(modelClass: Class<T>):T{
         if(modelClass.isAssignableFrom(CalenderViewModel::class.java)){
-            @Suppress("UNCHECKED_CAST")
-            return CalenderViewModel() as T
+            synchronized(this) {
+                @Suppress("UNCHECKED_CAST")
+                return CalenderViewModel.getInstance() as T
+            }
         }
         throw IllegalArgumentException("UNKNOWN VIEW MODEL CLASS")
     }
