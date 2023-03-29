@@ -1,17 +1,26 @@
 package com.nakyoung.goalforyou.calender
 
 import android.content.Context
-import android.view.LayoutInflater
+import android.util.AttributeSet
 import android.view.ViewGroup
-import android.view.ViewManager
-import android.widget.SimpleAdapter.ViewBinder
 import androidx.core.view.isVisible
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nakyoung.goalforyou.R
 import com.nakyoung.goalforyou.view.CalenderDateCardview
 import java.time.DayOfWeek
 import java.time.LocalDate
+
+
+class CalenderRecyclerView @JvmOverloads constructor(
+     context: Context,
+     attr: AttributeSet? = null,
+     defStyleAttr: Int = androidx.recyclerview.R.attr.recyclerViewStyle
+) : RecyclerView(context, attr, defStyleAttr) {
+
+    init {
+        adapter = CalendarViewAdapter(CalenderViewModelFactory().create(CalenderViewModel::class.java).days)
+    }
+}
 
 class CalenderViewHolder(val cardView:CalenderDateCardview): RecyclerView.ViewHolder(cardView){
 
@@ -33,9 +42,8 @@ class CalendarViewAdapter(val days: List<Day>) :
     val endCount:Int
 
     init {
-        val today = LocalDate.now()
-        val dayOfMonth = today.month.length(today.isLeapYear)
-        val firstDayOfWeek = LocalDate.of(today.year,today.month,1).dayOfWeek
+        val lengthOfMonth = CalenderUtil.lengthOfThisMonth()
+        val firstDayOfWeek = CalenderUtil.firstDayOfWeek(CalenderUtil.today.monthValue)
 
         //startCount Initial
         //startCount는 Calendar Recycler View에서 첫 주에 며칠부터 Visible하게 할 것인지를 정함
@@ -52,7 +60,7 @@ class CalendarViewAdapter(val days: List<Day>) :
         //lastCount Initial
         //lastCount는 Calendar Recycler View에서 마지막 주에 며칠까지 Visible하게 할 것인지를 정함
         //startCount시점에서 dayOfMonth를 더하고 1을 빼면 끝나는 날의 Index가 됨
-        endCount = startCount + dayOfMonth - 1
+        endCount = startCount + lengthOfMonth - 1
 
     }
 
