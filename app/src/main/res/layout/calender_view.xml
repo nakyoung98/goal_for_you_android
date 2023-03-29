@@ -22,12 +22,12 @@
         android:id="@+id/month"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginTop="8dp"
         android:text="3"
+        android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/year"
-        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
+        app:layout_constraintTop_toBottomOf="@+id/year" />
 
     <View
         android:id="@+id/view2"
@@ -50,7 +50,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/calender"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_small"
         app:layout_constraintBottom_toBottomOf="parent"
