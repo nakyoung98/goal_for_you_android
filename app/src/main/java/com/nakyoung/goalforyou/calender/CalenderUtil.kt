@@ -32,9 +32,20 @@ class CalenderUtil {
          * 금년을 기준으로 함
          **/
         fun firstDayOfWeek(month: Int): DayOfWeek {
-            return LocalDate.of(today.year,today.month,1).dayOfWeek
+            return LocalDate.of(today.year,month,1).dayOfWeek
         }
 
+        fun firstPositionOfMonth(firstDayOfWeek: DayOfWeek): Int {
+            return when (firstDayOfWeek) {
+                DayOfWeek.SUNDAY -> 0
+                DayOfWeek.MONDAY -> 1
+                DayOfWeek.TUESDAY -> 2
+                DayOfWeek.WEDNESDAY -> 3
+                DayOfWeek.THURSDAY -> 4
+                DayOfWeek.FRIDAY -> 5
+                DayOfWeek.SATURDAY -> 6
+                else -> -1
+            }
+        }
     }
-
 }
