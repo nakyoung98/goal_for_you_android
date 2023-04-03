@@ -2,8 +2,12 @@ package com.nakyoung.goalforyou.calender
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemLongClickListener
+import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nakyoung.goalforyou.R
 import com.nakyoung.goalforyou.view.CalenderDateCardview
@@ -22,8 +26,7 @@ class CalenderRecyclerView @JvmOverloads constructor(
     }
 }
 
-class CalenderViewHolder(val cardView:CalenderDateCardview): RecyclerView.ViewHolder(cardView){
-
+class CalenderViewHolder(val cardView:CalenderDateCardview, val itemLongClickListener: CalendarViewAdapter.ItemLongClickListener? = null): RecyclerView.ViewHolder(cardView){
     fun bind(day: Day?) {
         if (day != null) {
             cardView.date = day.day
@@ -34,8 +37,17 @@ class CalenderViewHolder(val cardView:CalenderDateCardview): RecyclerView.ViewHo
     }
 }
 
-class CalendarViewAdapter(val days: List<Day>) :
+class CalendarViewAdapter(val days: List<Day>,
+                          var itemLongClickListener: ItemLongClickListener? = null) :
     RecyclerView.Adapter<CalenderViewHolder>() {
+
+    interface ItemLongClickListener {
+        fun onItemLongClick(item: View, indexInDays: Int)
+    }
+
+    fun setOnItemLongClickListener(listener: ItemLongClickListener) {
+        itemLongClickListener = listener
+    }
 
     val length = 7 * 5
     val startCount:Int
@@ -47,15 +59,7 @@ class CalendarViewAdapter(val days: List<Day>) :
 
         //startCount Initial
         //startCount는 Calendar Recycler View에서 첫 주에 며칠부터 Visible하게 할 것인지를 정함
-        when (firstDayOfWeek) {
-            DayOfWeek.SUNDAY -> startCount = 0
-            DayOfWeek.MONDAY -> startCount = 1
-            DayOfWeek.TUESDAY -> startCount = 2
-            DayOfWeek.WEDNESDAY -> startCount= 3
-            DayOfWeek.THURSDAY -> startCount = 4
-            DayOfWeek.FRIDAY -> startCount = 5
-            DayOfWeek.SATURDAY -> startCount = 6
-        }
+        startCount = CalenderUtil.firstPositionOfMonth(firstDayOfWeek)
 
         //lastCount Initial
         //lastCount는 Calendar Recycler View에서 마지막 주에 며칠까지 Visible하게 할 것인지를 정함
@@ -69,13 +73,17 @@ class CalendarViewAdapter(val days: List<Day>) :
         val view = CalenderDateCardview(parent.context)
 //        val view = CalenderDateCardview(parent.context,)
         //TODO attr 받아오도록 ViewAdapter에 생성자 파라미터 추가해야함
-        return CalenderViewHolder(view)
+        return CalenderViewHolder(view, itemLongClickListener)
     }
 
     /* Binds number of flowers to the header. */
     override fun onBindViewHolder(holder: CalenderViewHolder, position: Int) {
         val day = if (position in startCount..endCount) days[position - startCount] else null
         holder.bind(day)
+        holder.cardView.binding.layout.setOnLongClickListener {
+            itemLongClickListener?.onItemLongClick(it, position - startCount)
+            true
+        }
     }
 
     /* Returns number of items, since there is only one item in the header return one  */

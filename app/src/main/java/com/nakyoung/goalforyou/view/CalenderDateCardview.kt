@@ -42,10 +42,10 @@ class CalenderDateCardview
     ) : MaterialCardView(context, attrs, defStyle) {
 
     companion object{
-        private val DEF_STYLE_RES = R.style.Nakyoung_MaterialComponents_calendarCardView
+        private const val DEF_STYLE_RES = R.style.Nakyoung_MaterialComponents_calendarCardView
     }
 
-    private val binding: CalenderDateViewBinding
+    val binding: CalenderDateViewBinding
 
     var date: Int = 0
         set(value) {
@@ -118,11 +118,11 @@ class CalenderDateCardview
             field = value
         }
 
-    private val goals: List<TextView>
+    private val goalViews: List<TextView>
 
     init {
         binding = CalenderDateViewBinding.inflate(LayoutInflater.from(context),this,true)
-        goals = listOf(binding.firstGoal, binding.secondGoal, binding.thirdGoal)
+        goalViews = listOf(binding.firstGoal, binding.secondGoal, binding.thirdGoal)
 
         context.theme.obtainStyledAttributes(
             attrs,
@@ -148,9 +148,9 @@ class CalenderDateCardview
 
     //TODO 추후에 goal을 객체로 바꿔야함
     fun addGoal(goalIndex: GoalIndex, goal: Goal) {
-        if (!goals[goalIndex.ordinal].isVisible) {
-            goals[goalIndex.ordinal].text = goal.goalContent
-            goals[goalIndex.ordinal].isVisible = true
+        if (!goalViews[goalIndex.ordinal].isVisible) {
+            goalViews[goalIndex.ordinal].text = goal.goalContent
+            goalViews[goalIndex.ordinal].isVisible = true
         }
         //TODO else의 경우 어떻게 처리?
     }
@@ -159,5 +159,25 @@ class CalenderDateCardview
         for((index,goal) in goals.withIndex())
             addGoal(intToGoal(index), goal)
     }
+
+    fun addGoal(goal: Goal, isTextVisible: Boolean, background: Int?) {
+        for (goalView in goalViews) {
+            if (!goalView.isVisible) {
+                if (background != null) goalView.setBackgroundColor(background)
+                goalView.text = if (isTextVisible) goal.goalContent else ""
+                goalView.isVisible = true
+                return
+            }
+        }
+    }
+
+    fun addGoal(goal: Goal, isTextVisible: Boolean) {
+        addGoal(goal, isTextVisible, null)
+    }
+
+    fun addGoal(goal: Goal) {
+        addGoal(goal, true, null)
+    }
+
 }
 

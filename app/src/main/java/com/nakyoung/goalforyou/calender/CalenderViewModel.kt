@@ -23,7 +23,11 @@ class CalenderViewModel
         Log.i("CalenderViewModel",this.toString())
     }
 
-    private val Month: Month by lazy {
+    val year: Int by lazy {
+        today.year
+    }
+
+    val month: Month by lazy {
         today.month
     }
     private val dayOfMonth: Int by lazy {
