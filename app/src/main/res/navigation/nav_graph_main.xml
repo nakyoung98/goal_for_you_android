@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_calenderFragment_to_settingFragment"
             app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_calenderFragment_to_calenderDetailDialog"
+            app:destination="@id/calenderDetailDialog" />
     </fragment>
     <fragment
         android:id="@+id/ongoingFragment"
@@ -38,5 +41,10 @@
         android:id="@+id/settingFragment"
         android:name="com.nakyoung.goalforyou.setting.SettingFragment"
         android:label="SettingFragment" />
+
+    <dialog
+        android:id="@+id/calenderDetailDialog"
+        android:name="com.nakyoung.goalforyou.calender.CalenderDetailDialog"
+        android:label="CalenderDetailDialog" />
 
 </navigation>
