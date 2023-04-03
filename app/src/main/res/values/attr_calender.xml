@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <attr name="nakyoungCalenderDateCardviewStyle" format="reference"/>
+
+    <declare-styleable name="CalenderDateCardview">
+        <attr name="date" format="integer"/>
+        <attr name="dateTextColor" format="reference|color"/>
+        <attr name="datePosition" format="enum">
+            <enum name="start" value="8388611"/>
+            <enum name="center" value="1" />
+            <enum name="end" value="8388613"/>
+        </attr>
+        <attr name="dateBackgroundColor" format="reference|color"/>
+        <attr name="cardStrokeColor" format="reference|color"/>
+        <attr name="roundedCornerRadius" format="reference|dimension"/>
+        <attr name="goalTextColor" format="reference|color"/>
+        <attr name="firstGoalColor" format="reference|color"/>
+        <attr name="secondGoalColor" format="reference|color" />
+        <attr name="thirdGoalColor" format="reference|color" />
+    </declare-styleable>
+
+    <color name="calender_background">#f4f0e6</color>
+
+    <string name="monday">월</string>
+    <string name="tuesday">화</string>
+    <string name="wednesday">수</string>
+    <string name="thursday">목</string>
+    <string name="friday">금</string>
+    <string name="saturday">토</string>
+    <string name="sunday">일</string>
+
+    <!--    Custom calenderDateCardview 값 정리-->
+    <dimen name="date_cardview_corner">2dp</dimen>
+    <dimen name="date_cardview_elevation">1dp</dimen>
+    <dimen name="date_cardview_item_margin">0.5dp</dimen>
+    <dimen name="date_cardview_width">@dimen/margin_large</dimen>
+    <dimen name="date_cardview_height">@dimen/margin_xlarge</dimen>
+    <dimen name="calender_corner">16dp</dimen>
+
+
+    <color name="default_text_color">#334557</color>
+    <color name="default_date_background">@color/default_background</color>
+    <color name="default_first_goal_background_color">@color/goal_background_1</color>
+    <color name="default_second_goal_background_color">@color/goal_background_2</color>
+    <color name="default_third_goal_background_color">@color/goal_background_3</color>
+    <color name="default_stroke_color">#f1ede3</color>
+
+    <style name="Nakyoung.MaterialComponents.calendarCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="nakyoungCalenderDateCardviewStyle" type="">@style/Nakyoung.MaterialComponents.calendarCardView</item>
+        <item name="date">1</item>
+        <item name="dateTextColor">@color/default_text_color</item>
+        <item name="dateBackgroundColor">@color/default_date_background</item>
+        <item name="cardStrokeColor">@color/default_stroke_color</item>
+        <item name="roundedCornerRadius">@dimen/date_cardview_corner</item>
+        <item name="goalTextColor">@color/default_text_color</item>
+        <item name="firstGoalColor">@color/default_first_goal_background_color</item>
+        <item name="secondGoalColor">@color/default_second_goal_background_color</item>
+        <item name="thirdGoalColor">@color/default_third_goal_background_color</item>
+    </style>
+
+</resources>

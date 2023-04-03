@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="colors_calender_goal_background">
+        <item></item>
+    </array>
+
+    <color name="goal_background_1">#D1DCF4</color>
+    <color name="goal_background_2">#E3C4D2</color>
+    <color name="goal_background_3">#EABDB3</color>
+    <color name="goal_background_4">#E1E8C2</color>
+    <color name="goal_background_5">#FFEDC0AB</color>
+    <color name="goal_background_6">#FFEDC0AB</color>
+
+</resources>

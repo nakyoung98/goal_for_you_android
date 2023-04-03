@@ -1,6 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.GoalForYou" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/default_background</item>
+        <item name="colorSecondary">#f4f0e6</item>
+        <item name="android:colorBackground">@color/default_background</item>
+        <item name="android:statusBarColor">@color/default_background</item>
+        <item name="android:navigationBarColor">@color/default_background</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
