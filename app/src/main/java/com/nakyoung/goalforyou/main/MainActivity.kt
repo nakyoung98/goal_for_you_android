@@ -16,6 +16,7 @@ class MainActivity: AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding
         get() = _binding!!
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     private lateinit var navHostFragment:NavHostFragment
     private lateinit var navController: NavController
@@ -24,8 +25,8 @@ class MainActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setNavHost()
+        appBarConfiguration = AppBarConfiguration(navController.graph, binding.root)
     }
 
     private fun setNavHost() {
