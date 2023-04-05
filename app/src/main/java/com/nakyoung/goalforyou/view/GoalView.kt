@@ -18,10 +18,13 @@ class GoalView
 @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0)
     : ConstraintLayout(context, attrs, defStyleAttr, defStyleRes)
 {
-    private val binding: GoalViewBinding
+    val binding
+        get() = _binding!!
+    private var _binding: GoalViewBinding? = null
+
 
     init {
-        binding = GoalViewBinding.inflate(LayoutInflater.from(context),this,true)
+        _binding = GoalViewBinding.inflate(LayoutInflater.from(context),this,true)
     }
 }
 
