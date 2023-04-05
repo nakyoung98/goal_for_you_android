@@ -1,4 +1,4 @@
-package com.nakyoung.goalforyou.calender
+package com.nakyoung.goalforyou.main.calender
 
 import java.time.DayOfWeek
 import java.time.LocalDate

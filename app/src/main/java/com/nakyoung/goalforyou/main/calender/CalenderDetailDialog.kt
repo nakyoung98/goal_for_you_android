@@ -1,4 +1,4 @@
-package com.nakyoung.goalforyou.calender
+package com.nakyoung.goalforyou.main.calender
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -37,12 +37,12 @@ class CalenderDetailDialog( val indexIndays: Int
         binding = DialogCalenderDetailBinding.inflate(layoutInflater)
 
         lifecycleScope.launch {
-            binding.day.text = viewModel!!.days[indexIndays].day.toString()
+            binding.day.text = viewModel.days[indexIndays].day.toString()
         }
 
         return AlertDialog.Builder(requireContext())
             .setView(binding.root)
-            .setNegativeButton("확인") { dialog, id -> getDialog()?.cancel() }
+            .setNegativeButton("확인") { _, _ -> dialog?.cancel() }
             .create()
     }
 }

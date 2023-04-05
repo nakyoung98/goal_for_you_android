@@ -1,4 +1,4 @@
-package com.nakyoung.goalforyou.complete
+package com.nakyoung.goalforyou.main.goal.complete
 
 import android.os.Bundle
 import android.view.LayoutInflater

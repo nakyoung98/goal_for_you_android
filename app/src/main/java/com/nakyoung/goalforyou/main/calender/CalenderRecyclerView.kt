@@ -1,4 +1,4 @@
-package com.nakyoung.goalforyou.calender
+package com.nakyoung.goalforyou.main.calender
 
 import android.content.Context
 import android.util.AttributeSet

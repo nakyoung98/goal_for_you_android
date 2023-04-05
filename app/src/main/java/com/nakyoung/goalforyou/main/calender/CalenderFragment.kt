@@ -1,26 +1,16 @@
-package com.nakyoung.goalforyou.calender
+package com.nakyoung.goalforyou.main.calender
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
-import android.view.View.OnLongClickListener
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.os.bundleOf
-import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener
 import com.nakyoung.goalforyou.R
 import com.nakyoung.goalforyou.databinding.FragmentCalenderBinding
-import com.nakyoung.goalforyou.view.CalenderDateCardview
 import kotlinx.coroutines.launch
 
 class CalenderFragment : Fragment() {
@@ -54,10 +44,10 @@ class CalenderFragment : Fragment() {
 
             adapter = CalendarViewAdapter(viewModel.days)
 
-            var itemLongClickListener = object :CalendarViewAdapter.ItemLongClickListener{
-                override fun onItemLongClick(item: View, indexIndays: Int) {
+            var itemLongClickListener = object : CalendarViewAdapter.ItemLongClickListener {
+                override fun onItemLongClick(item: View, indexInDays: Int) {
                     Log.i("CalendarViewAdapter","Item onClick!")
-                    CalenderDetailDialog(indexIndays).show(childFragmentManager, "CalenderDetailDialog")
+                    CalenderDetailDialog(indexInDays).show(childFragmentManager, "CalenderDetailDialog")
                 }
             }
             adapter.setOnItemLongClickListener(itemLongClickListener)

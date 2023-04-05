@@ -1,4 +1,4 @@
-package com.nakyoung.goalforyou.database.domain
+package com.nakyoung.goalforyou.main.database.domain
 
 import java.time.LocalDate
 import java.util.Date

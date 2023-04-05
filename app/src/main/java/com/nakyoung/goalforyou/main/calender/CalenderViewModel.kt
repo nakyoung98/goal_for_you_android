@@ -1,10 +1,10 @@
-package com.nakyoung.goalforyou.calender
+package com.nakyoung.goalforyou.main.calender
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.nakyoung.goalforyou.database.domain.Goal
-import com.nakyoung.goalforyou.database.domain.goalsFromUser
+import com.nakyoung.goalforyou.main.database.domain.Goal
+import com.nakyoung.goalforyou.main.database.domain.goalsFromUser
 import java.time.LocalDate
 import java.time.Month
 
