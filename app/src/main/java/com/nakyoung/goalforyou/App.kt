@@ -1,7 +1,7 @@
 package com.nakyoung.goalforyou
 
 import android.app.Application
-import com.nakyoung.goalforyou.database.domain.fillGoals
+import com.nakyoung.goalforyou.main.database.domain.fillGoals
 
 class App: Application() {
 

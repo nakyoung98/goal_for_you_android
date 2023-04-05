@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import com.google.android.material.card.MaterialCardView
 import com.nakyoung.goalforyou.R
-import com.nakyoung.goalforyou.database.domain.Goal
+import com.nakyoung.goalforyou.main.database.domain.Goal
 import com.nakyoung.goalforyou.databinding.CalenderDateViewBinding
 
 /**
