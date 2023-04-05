@@ -6,7 +6,7 @@
     
     <fragment
         android:id="@+id/calenderFragment"
-        android:name="com.nakyoung.goalforyou.calender.CalenderFragment"
+        android:name="com.nakyoung.goalforyou.main.calender.CalenderFragment"
         android:label="CalenderFragment" >
         <action
             android:id="@+id/action_calenderFragment_to_ongoingFragment"
@@ -23,7 +23,7 @@
     </fragment>
     <fragment
         android:id="@+id/ongoingFragment"
-        android:name="com.nakyoung.goalforyou.ongoing.OngoingFragment"
+        android:name="com.nakyoung.goalforyou.main.goal.ongoing.OngoingFragment"
         android:label="OngoingFragment" >
         <action
             android:id="@+id/action_ongoingFragment_to_completeFragment"
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/completeFragment"
-        android:name="com.nakyoung.goalforyou.complete.CompleteFragment"
+        android:name="com.nakyoung.goalforyou.main.goal.complete.CompleteFragment"
         android:label="CompleteFragment" >
         <action
             android:id="@+id/action_completeFragment_to_ongoingFragment"
@@ -44,7 +44,7 @@
 
     <dialog
         android:id="@+id/calenderDetailDialog"
-        android:name="com.nakyoung.goalforyou.calender.CalenderDetailDialog"
+        android:name="com.nakyoung.goalforyou.main.calender.CalenderDetailDialog"
         android:label="CalenderDetailDialog" />
 
 </navigation>
