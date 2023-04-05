@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="GoalViewStyle" format="reference"/>
+
+    <declare-styleable name="GoalProgressBar">
+        <attr name="CornerRadius" format="reference|dimension"/>
+    </declare-styleable>
+
+</resources>
