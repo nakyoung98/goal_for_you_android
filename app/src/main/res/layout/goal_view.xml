@@ -2,69 +2,66 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="@dimen/goal_view_width"
+    android:layout_height="@dimen/goal_view_height"
 
-    android:backgroundTint="@color/default_stroke_color"
-    app:layout_constraintDimensionRatio="H,3:1">
+    android:background="@drawable/goal_dday_square"
+    android:backgroundTint="@color/default_stroke_color">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/goal_status"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_margin="@dimen/margin_xsmall"
+        android:layout_weight="2"
+        android:gravity="start|center_vertical"
+        android:text="ON GOING"
+        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+        android:textColor="@color/default_text_color"
+        app:layout_constraintBaseline_toBaselineOf="@+id/goal_d_day"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/goal_d_day"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_xsmall"
+        android:layout_weight="1"
+        android:background="@color/default_text_color"
+        android:backgroundTint="@color/default_text_color"
+        android:gravity="center|center_vertical"
+        android:padding="@dimen/margin_xxsmall"
+        android:text="D - 30"
+        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+        android:textColor="@color/default_date_background"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/goal_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_xsmall"
-            android:layout_marginEnd="@dimen/margin_xsmall"
-            android:layout_weight="2"
-            android:gravity="start|center_vertical"
-            android:text="ON GOING"
-            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-            android:textColor="@color/default_text_color" />
-
-        <TextView
-            android:id="@+id/goal_d_day"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/default_text_color"
-            android:backgroundTint="@color/default_text_color"
-            android:gravity="center"
-            android:padding="@dimen/margin_xxsmall"
-            android:text="D - 30"
-            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-            android:textColor="@color/default_date_background" />
-    </LinearLayout>
+        app:layout_constraintStart_toEndOf="@+id/goal_status"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/goal_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small"
         android:layout_marginTop="@dimen/margin_xsmall"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_xsmall"
         android:gravity="center"
         android:text="30분 걷기"
         android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
         android:textColor="@color/default_text_color"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/goal_progress_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/goal_d_day" />
 
     <com.nakyoung.goalforyou.view.progressbar.GoalProgressBar
         android:id="@+id/goal_progress_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/goal_title" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

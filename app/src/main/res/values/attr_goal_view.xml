@@ -6,4 +6,6 @@
         <attr name="CornerRadius" format="reference|dimension"/>
     </declare-styleable>
 
+    <dimen name="goal_view_width">160dp</dimen>
+    <dimen name="goal_view_height">120dp</dimen>
 </resources>
