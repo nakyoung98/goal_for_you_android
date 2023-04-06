@@ -45,9 +45,9 @@ fun fillGoals() {
         Goal(
             3,
             "집까지걷기",
-            LocalDate.of(2023, 3, 30),
-            LocalDate.of(2023, 4, 21),
-            "SOON",
+            LocalDate.of(2023, 4, 2),
+            LocalDate.of(2023, 4, 4),
+            "ONGOING",
             5
         )
     )
