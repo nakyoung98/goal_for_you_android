@@ -11,6 +11,7 @@ import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.nakyoung.goalforyou.R
 import com.nakyoung.goalforyou.databinding.FragmentCalenderBinding
+import com.nakyoung.goalforyou.main.database.domain.goalsFromUser
 import kotlinx.coroutines.launch
 
 class CalenderFragment : Fragment() {
@@ -19,7 +20,7 @@ class CalenderFragment : Fragment() {
         fun newInstance() = CalenderFragment()
     }
 
-    private val viewModel: CalenderViewModel by navGraphViewModels(R.id.nav_graph_main)
+    private val calenderViewModel: CalenderViewModel by navGraphViewModels(R.id.nav_graph_main)
     private lateinit var binding: FragmentCalenderBinding
     private lateinit var adapter: CalendarViewAdapter
     override fun onCreateView(
@@ -38,11 +39,10 @@ class CalenderFragment : Fragment() {
         Log.i("CalenderFragment","onViewCreated")
 
         viewLifecycleOwner.lifecycleScope.launch {
-//            viewModel = CalenderViewModelFactory().create(CalenderViewModel::class.java)
-            binding.calenderView.year.text = viewModel.year.toString()
-            binding.calenderView.month.text = viewModel.month.name
+            binding.calenderView.year.text = calenderViewModel.year.toString()
+            binding.calenderView.month.text = calenderViewModel.month.name
 
-            adapter = CalendarViewAdapter(viewModel.days)
+            adapter = CalendarViewAdapter(calenderViewModel.days)
 
             var itemLongClickListener = object : CalendarViewAdapter.ItemLongClickListener {
                 override fun onItemLongClick(item: View, indexInDays: Int) {
@@ -53,7 +53,11 @@ class CalenderFragment : Fragment() {
             adapter.setOnItemLongClickListener(itemLongClickListener)
 
             binding.calenderView.calender.adapter = adapter
+        }
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            binding.goalRecyclerView?.layoutManager = GridLayoutManager(requireContext(),2)
+            binding.goalRecyclerView?.data = goalsFromUser
         }
     }
 }
