@@ -21,15 +21,14 @@
         android:id="@+id/ongoing_progress_bar_status"
         android:layout_width="0dp"
         android:layout_height="@dimen/margin_small"
-        android:layout_marginEnd="16dp"
         android:background="@color/default_text_color"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/progress_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_xsmall"
@@ -40,8 +39,6 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/ongoing_progress_bar_status"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/ongoing_progress_bar"
         app:layout_constraintTop_toTopOf="@+id/ongoing_progress_bar_status" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
