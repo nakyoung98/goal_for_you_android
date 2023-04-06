@@ -9,13 +9,7 @@ import java.time.LocalDate
 import java.time.Month
 
 class CalenderViewModel
-    private constructor()
     : ViewModel() {
-
-    companion object {
-        val viewModel: CalenderViewModel? = null
-        fun getInstance() = if (viewModel == null) CalenderViewModel() else viewModel
-    }
 
     private val goals = goalsFromUser
 
@@ -63,13 +57,10 @@ class CalenderViewModel
 }
 
 class CalenderViewModelFactory(): ViewModelProvider.Factory{
-
     override fun <T:ViewModel> create(modelClass: Class<T>):T{
         if(modelClass.isAssignableFrom(CalenderViewModel::class.java)){
-            synchronized(this) {
-                @Suppress("UNCHECKED_CAST")
-                return CalenderViewModel.getInstance() as T
-            }
+            @Suppress("UNCHECKED_CAST")
+            return CalenderViewModel() as T
         }
         throw IllegalArgumentException("UNKNOWN VIEW MODEL CLASS")
     }
