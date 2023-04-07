@@ -2,6 +2,7 @@ package com.nakyoung.goalforyou.view.progressbar
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
@@ -24,6 +25,11 @@ class GoalProgressBar
     @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0)
     : ConstraintLayout(context, attrs, defStyleAttr, defStyleRes){
 
+    companion object {
+
+        private const val MIN_PROGRESS_STATUS_BAR_FOR_PROGRESS_STATUS = 25
+    }
+
     private val binding: ProgressbarGoalBinding
 
     init {
@@ -31,36 +37,11 @@ class GoalProgressBar
     }
 
     fun setProgressStatus(goal: Goal) {
-
-        var width: Int
-        val progressStatus = GoalUtil.getProgressStatus(goal).let { progressStatus ->
-            binding.progressStatus.text ="${progressStatus} %"
-            progressStatus
-        }
-
-        binding.root.viewTreeObserver.addOnGlobalLayoutListener(
-            object : OnGlobalLayoutListener {
-                override fun onGlobalLayout() {
-                    binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                    width = binding.root.width
-
-                    ConstraintSet().apply {
-                        clone(binding.root)
-                        clear(binding.ongoingProgressBarStatus.id,ConstraintSet.END)
-                        val progressStatusPixel = width * progressStatus / 100
-                        Log.i("GoalProgressBar","root width px = ${width}, progressStatusPixel =${progressStatusPixel}")
-                        connect(binding.ongoingProgressBarStatus.id,ConstraintSet.END,
-                            binding.ongoingProgressBar.id,ConstraintSet.END)
-                        setMargin(binding.ongoingProgressBarStatus.id,ConstraintSet.END,width - progressStatusPixel)
-                        applyTo(binding.root)
-                        Log.i("GoalProgressBar","binding.ongoingProgressBarStatus.marginEnd =${binding.ongoingProgressBarStatus.marginEnd}")
-                    }
-                }
-            }
-        )
+        val progressStatus = GoalUtil.getProgressStatus(goal)
+        setProgressStatus(progressStatus)
     }
 
-    fun setProgressStatus(progress: Int) {
+    private fun setProgressStatus(progress: Int) {
 
         var width: Int
         val progressStatus = progress.let { progressStatus ->
@@ -78,12 +59,23 @@ class GoalProgressBar
                         clone(binding.root)
                         clear(binding.ongoingProgressBarStatus.id,ConstraintSet.END)
                         val progressStatusPixel = width * progressStatus / 100
-                        Log.i("GoalProgressBar","root width px = ${width}, progressStatusPixel =${progressStatusPixel}")
+                        Log.i("GoalProgressBar","progressStatus= ${progressStatus}, root width p/x = ${width}, progressStatusPixel =${progressStatusPixel}")
                         connect(binding.ongoingProgressBarStatus.id,ConstraintSet.END,
                             binding.ongoingProgressBar.id,ConstraintSet.END)
                         setMargin(binding.ongoingProgressBarStatus.id,ConstraintSet.END,width - progressStatusPixel)
-                        applyTo(binding.root)
                         Log.i("GoalProgressBar","binding.ongoingProgressBarStatus.marginEnd =${binding.ongoingProgressBarStatus.marginEnd}")
+                        applyTo(binding.root)
+
+                        if (progressStatus < MIN_PROGRESS_STATUS_BAR_FOR_PROGRESS_STATUS ) {
+                            val tempMargin = binding.progressStatus.marginEnd
+                            clear(binding.progressStatus.id,ConstraintSet.END)
+                            connect(binding.progressStatus.id, ConstraintSet.START,
+                                binding.ongoingProgressBarStatus.id,ConstraintSet.END)
+                            setMargin(binding.progressStatus.id, ConstraintSet.START, tempMargin)
+                            binding.progressStatus.setTextColor((binding.ongoingProgressBarStatus.background as ColorDrawable).color)
+                        }
+                        applyTo(binding.root)
+
                     }
                 }
             }
