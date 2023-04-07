@@ -43,6 +43,7 @@ class CalenderDateCardview
 
     companion object{
         private const val DEF_STYLE_RES = R.style.Nakyoung_MaterialComponents_calendarCardView
+        private const val MAX_GOAL = 3
     }
 
     val binding: CalenderDateViewBinding
@@ -156,8 +157,11 @@ class CalenderDateCardview
     }
 
     fun addGoal(goals: List<Goal>) {
-        for((index,goal) in goals.withIndex())
+        for((index,goal) in goals.withIndex()) {
+            if (index == MAX_GOAL) break
+
             addGoal(intToGoal(index), goal)
+        }
     }
 
     fun addGoal(goal: Goal, isTextVisible: Boolean, background: Int?) {
