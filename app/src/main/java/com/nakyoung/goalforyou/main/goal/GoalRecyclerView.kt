@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.view.WindowManager
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -17,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nakyoung.goalforyou.R
 import com.nakyoung.goalforyou.databinding.RecyclerviewGoalBinding
 import com.nakyoung.goalforyou.main.database.domain.Goal
-import com.nakyoung.goalforyou.util.GraphicUtil
 import com.nakyoung.goalforyou.view.GoalView
 
 
@@ -41,9 +41,6 @@ class GoalRecyclerView
     init {
         setLayoutManager(layoutManager)
         _binding = RecyclerviewGoalBinding.inflate(LayoutInflater.from(context))
-    }
-
-    fun paddingRight() {
         addItemDecoration(GoalItemDecoration(context))
     }
 }
@@ -51,9 +48,7 @@ class GoalRecyclerView
 class GoalViewAdapter(private val data: List<Goal>) : RecyclerView.Adapter<GoalViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GoalViewHolder {
-        return GoalViewHolder(GoalView(parent.context).apply {
-
-        })
+        return GoalViewHolder(GoalView(parent.context))
     }
 
     override fun getItemCount(): Int {
@@ -90,11 +85,40 @@ class GoalItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
     ) {
         super.getItemOffsets(outRect, view, parent, state)
 
-        val layoutManager = parent.layoutManager
+        view.viewTreeObserver.addOnGlobalLayoutListener(
+            object : OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    view.viewTreeObserver.removeOnGlobalLayoutListener(this)
 
-        if ( layoutManager is GridLayoutManager) {
-            parent.getChildAdapterPosition(view)
-            layoutManager.spanCount
-        }
+                    val layoutManager = parent.layoutManager
+
+                    if ( layoutManager is GridLayoutManager) {
+                        val spanCount = layoutManager.spanCount
+                        val nowPosition = parent.getChildAdapterPosition(view)
+                        val margin =
+                            (parent.width - (view.width * spanCount)) / (spanCount - 1) / 2
+                        Log.i("margin", "recyclerview width ${parent.width}, view width ${view.width}, margin: ${margin}")
+
+                        if (nowPosition % spanCount == 0) {
+                            outRect.right = margin
+                        }else if (nowPosition % spanCount == spanCount - 1) {
+                            outRect.left = margin
+                        } else {
+                            outRect.right = margin
+                            outRect.left = margin
+                        }
+
+                        outRect.top = margin
+                        outRect.bottom = margin
+                    }
+                    else if(layoutManager is LinearLayoutManager){
+                        if(layoutManager.orientation == LinearLayoutManager.HORIZONTAL) outRect.bottom = 10
+                        else outRect.right = 10
+                    }
+                }
+            }
+        )
+
+
     }
 }
