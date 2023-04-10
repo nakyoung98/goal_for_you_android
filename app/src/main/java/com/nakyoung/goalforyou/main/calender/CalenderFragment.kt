@@ -30,7 +30,7 @@ class CalenderFragment : Fragment() {
         Log.i("CalenderFragment","onCreateView")
 
         binding = FragmentCalenderBinding.inflate(inflater,container,false)
-        binding.calenderView.calender.layoutManager = GridLayoutManager(requireContext(), 7)
+        binding.calenderView.binding.calender.layoutManager = GridLayoutManager(requireContext(), 7)
         return binding.root
     }
 
@@ -39,8 +39,8 @@ class CalenderFragment : Fragment() {
         Log.i("CalenderFragment","onViewCreated")
 
         viewLifecycleOwner.lifecycleScope.launch {
-            binding.calenderView.year.text = calenderViewModel.year.toString()
-            binding.calenderView.month.text = calenderViewModel.month.name
+            binding.calenderView.binding.year.text = calenderViewModel.year.toString()
+            binding.calenderView.binding.month.text = calenderViewModel.month.name
 
             adapter = CalendarViewAdapter(calenderViewModel.days)
 
@@ -52,7 +52,7 @@ class CalenderFragment : Fragment() {
             }
             adapter.setOnItemLongClickListener(itemLongClickListener)
 
-            binding.calenderView.calender.adapter = adapter
+            binding.calenderView.binding.calender.adapter = adapter
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
