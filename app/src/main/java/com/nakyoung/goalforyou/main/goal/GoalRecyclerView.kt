@@ -1,5 +1,6 @@
 package com.nakyoung.goalforyou.main.goal
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.PixelFormat
@@ -27,7 +28,7 @@ class GoalRecyclerView
         context: Context,
         attrs: AttributeSet? = null,
         defStyle: Int = com.google.android.material.R.attr.recyclerViewStyle,
-        layoutManager: LayoutManager? = LinearLayoutManager(context),
+        layoutManager: LayoutManager? = GridLayoutManager(context,1),
         ): RecyclerView(context, attrs, defStyle) {
 
     val binding
@@ -50,6 +51,18 @@ class GoalRecyclerView
     override fun draw(c: Canvas?) {
         super.draw(c)
         invalidateItemDecorations()
+    }
+
+    @SuppressLint("DrawAllocation")
+    override fun onMeasure(widthSpec: Int, heightSpec: Int) {
+        super.onMeasure(widthSpec, heightSpec)
+        Log.i("ONMEASURE","measure, measuredWidth: ${measuredWidth}, goalview width:${resources.getDimension(R.dimen.goal_view_width)}")
+        val spanCount: Int = measuredWidth / resources.getDimension(R.dimen.goal_view_width) .toInt()
+
+        when (layoutManager) {
+            is GridLayoutManager -> if(spanCount != (layoutManager as GridLayoutManager).spanCount )(layoutManager as GridLayoutManager).spanCount = spanCount
+            is LinearLayoutManager -> layoutManager = GridLayoutManager(context, spanCount)
+        }
     }
 }
 
