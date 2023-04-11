@@ -1,7 +1,10 @@
 package com.nakyoung.goalforyou.main.calender
 
 import android.content.Context
+import android.graphics.Canvas
+import android.graphics.Rect
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView.OnItemLongClickListener
@@ -23,7 +26,24 @@ class CalenderRecyclerView @JvmOverloads constructor(
 
     init {
         adapter = CalendarViewAdapter(CalenderViewModelFactory().create(CalenderViewModel::class.java).days)
+        addItemDecoration(object : ItemDecoration() {
+            override fun getItemOffsets(
+                outRect: Rect,
+                view: View,
+                parent: RecyclerView,
+                state: State
+            ) {
+                outRect.set(10,10,10,10)
+                Log.i("CalenderRecyclerView","invalidate")
+            }
+        })
     }
+
+    override fun onDraw(c: Canvas?) {
+        super.onDraw(c)
+        invalidateItemDecorations()
+    }
+
 }
 
 class CalenderViewHolder(val cardView:CalenderDateCardview, val itemLongClickListener: CalendarViewAdapter.ItemLongClickListener? = null): RecyclerView.ViewHolder(cardView){
@@ -49,7 +69,6 @@ class CalendarViewAdapter(val days: List<Day>,
         itemLongClickListener = listener
     }
 
-    val length = 7 * 5
     val startCount:Int
     val endCount:Int
 
@@ -64,7 +83,7 @@ class CalendarViewAdapter(val days: List<Day>,
         //lastCount Initial
         //lastCount는 Calendar Recycler View에서 마지막 주에 며칠까지 Visible하게 할 것인지를 정함
         //startCount시점에서 dayOfMonth를 더하고 1을 빼면 끝나는 날의 Index가 됨
-        endCount = startCount + lengthOfMonth - 1
+        endCount = startCount + lengthOfMonth
 
     }
 
@@ -80,7 +99,7 @@ class CalendarViewAdapter(val days: List<Day>,
     override fun onBindViewHolder(holder: CalenderViewHolder, position: Int) {
         val day = if (position in startCount..endCount) days[position - startCount] else null
         holder.bind(day)
-        holder.cardView.binding.layout.setOnLongClickListener {
+        holder.cardView.binding.calenderDateView.setOnLongClickListener {
             itemLongClickListener?.onItemLongClick(it, position - startCount)
             true
         }
@@ -88,6 +107,6 @@ class CalendarViewAdapter(val days: List<Day>,
 
     /* Returns number of items, since there is only one item in the header return one  */
     override fun getItemCount(): Int {
-        return length
+        return endCount
     }
 }

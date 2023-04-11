@@ -6,7 +6,9 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.isVisible
 import com.google.android.material.card.MaterialCardView
 import com.nakyoung.goalforyou.R
@@ -39,7 +41,7 @@ class CalenderDateCardview
     (context: Context,
      attrs: AttributeSet? = null,
      defStyle: Int = R.attr.nakyoungCalenderDateCardviewStyle
-    ) : MaterialCardView(context, attrs, defStyle) {
+    ) : LinearLayout(context, attrs, defStyle) {
 
     companion object{
         private const val DEF_STYLE_RES = R.style.Nakyoung_MaterialComponents_calendarCardView
@@ -71,7 +73,7 @@ class CalenderDateCardview
 
     var dateBackgroundColor: Int = Color.TRANSPARENT
         set(value) {
-            binding.calenderDateCardview.setCardBackgroundColor(value)
+            binding.calenderDateView.setBackgroundColor(value)
             field = value
         }
 
@@ -81,17 +83,6 @@ class CalenderDateCardview
             field = value
         }
 
-    var cardStrokeColor: Int = Color.BLACK
-        set(value) {
-            binding.calenderDateCardview.strokeColor = value
-            field = value
-        }
-
-    var roundedCornerRadius: Float = 0f
-        set(value) {
-            binding.calenderDateCardview.radius = value
-            field = value
-        }
 
     var goalTextColor: Int = Color.BLACK
         set(value) {
@@ -134,8 +125,6 @@ class CalenderDateCardview
                     datePosition = getInt(R.styleable.CalenderDateCardview_datePosition,Gravity.START)
                     dateTextColor = getColor(R.styleable.CalenderDateCardview_dateTextColor, dateTextColor)
                     dateBackgroundColor = getColor(R.styleable.CalenderDateCardview_dateBackgroundColor, dateBackgroundColor)
-                    cardStrokeColor = getColor(R.styleable.CalenderDateCardview_cardStrokeColor, cardStrokeColor)
-                    roundedCornerRadius = getDimension(R.styleable.CalenderDateCardview_roundedCornerRadius, roundedCornerRadius)
                     goalTextColor = getColor(R.styleable.CalenderDateCardview_goalTextColor, goalTextColor)
                     firstGoalColor = getColor(R.styleable.CalenderDateCardview_firstGoalColor, firstGoalColor)
                     secondGoalColor = getColor(R.styleable.CalenderDateCardview_secondGoalColor, secondGoalColor)
@@ -144,7 +133,6 @@ class CalenderDateCardview
                   recycle()
                 }
             }
-        cardElevation = 0f
     }
 
     //TODO 추후에 goal을 객체로 바꿔야함

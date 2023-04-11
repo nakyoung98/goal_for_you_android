@@ -6,7 +6,8 @@
     android:layout_height="@dimen/goal_view_height"
 
     android:background="@drawable/goal_dday_square"
-    android:backgroundTint="@color/default_stroke_color">
+    android:backgroundTint="?attr/colorPrimaryContainer"
+    >
 
     <TextView
         android:id="@+id/goal_status"
@@ -17,7 +18,7 @@
         android:gravity="start|center_vertical"
         android:text="ON GOING"
         android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-        android:textColor="@color/default_text_color"
+        android:textColor="?attr/colorOnPrimaryContainer"
         app:layout_constraintBaseline_toBaselineOf="@+id/goal_d_day"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -27,13 +28,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_xsmall"
         android:layout_weight="1"
-        android:background="@color/default_text_color"
-        android:backgroundTint="@color/default_text_color"
-        android:gravity="center|center_vertical"
+        android:background="?attr/colorOnPrimaryContainer"
+        android:gravity="center"
         android:padding="@dimen/margin_xxsmall"
         android:text="D - 30"
         android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-        android:textColor="@color/default_date_background"
+        android:textColor="?attr/colorOnPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/goal_status"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,7 +49,7 @@
         android:gravity="center"
         android:text="30분 걷기"
         android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-        android:textColor="@color/default_text_color"
+        android:textColor="?attr/colorOnPrimaryContainer"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/goal_progress_bar"
         app:layout_constraintEnd_toEndOf="parent"

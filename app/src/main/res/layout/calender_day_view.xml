@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/sunday" />
+        android:text="@string/sunday"
+        android:textColor="?attr/colorOnPrimary" />
 
     <TextView
         android:id="@+id/monday"
@@ -18,7 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/monday" />
+        android:text="@string/monday"
+        android:textColor="?attr/colorOnPrimary" />
 
     <TextView
         android:id="@+id/tuesday"
@@ -26,7 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/tuesday" />
+        android:text="@string/tuesday"
+        android:textColor="?attr/colorOnPrimary" />
 
     <TextView
         android:id="@+id/wednesday"
@@ -34,7 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/wednesday" />
+        android:text="@string/wednesday"
+        android:textColor="?attr/colorOnPrimary" />
 
     <TextView
         android:id="@+id/thursday"
@@ -42,7 +46,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/thursday" />
+        android:text="@string/thursday"
+        android:textColor="?attr/colorOnPrimary" />
 
     <TextView
         android:id="@+id/friday"
@@ -50,7 +55,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/friday" />
+        android:text="@string/friday"
+        android:textColor="?attr/colorOnPrimary" />
 
     <TextView
         android:id="@+id/saturday"
@@ -58,5 +64,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/saturday" />
+        android:text="@string/saturday"
+        android:textColor="?attr/colorOnPrimary" />
 </LinearLayout>

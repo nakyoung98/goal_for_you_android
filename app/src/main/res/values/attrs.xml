@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorBackground1" format="color" />
+    <attr name="colorOnBackground1" format="color" />
+    <attr name="colorBackground1Container" format="color" />
+    <attr name="colorOnBackground1Container" format="color" />
+    <attr name="harmonizeBackground1" format="boolean" />
+    <attr name="colorBackground2" format="color" />
+    <attr name="colorOnBackground2" format="color" />
+    <attr name="colorBackground2Container" format="color" />
+    <attr name="colorOnBackground2Container" format="color" />
+    <attr name="harmonizeBackground2" format="boolean" />
+    <attr name="colorBackground3" format="color" />
+    <attr name="colorOnBackground3" format="color" />
+    <attr name="colorBackground3Container" format="color" />
+    <attr name="colorOnBackground3Container" format="color" />
+    <attr name="harmonizeBackground3" format="boolean" />
+</resources>

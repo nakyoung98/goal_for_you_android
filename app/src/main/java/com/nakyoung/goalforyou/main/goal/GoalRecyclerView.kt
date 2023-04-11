@@ -1,6 +1,7 @@
 package com.nakyoung.goalforyou.main.goal
 
 import android.content.Context
+import android.graphics.Canvas
 import android.graphics.PixelFormat
 import android.graphics.Rect
 import android.util.AttributeSet
@@ -38,10 +39,17 @@ class GoalRecyclerView
             adapter = GoalViewAdapter(value!!)
             field = value}
 
+    val itemDecoration: ItemDecoration
     init {
         setLayoutManager(layoutManager)
         _binding = RecyclerviewGoalBinding.inflate(LayoutInflater.from(context))
-        addItemDecoration(GoalItemDecoration(context))
+        itemDecoration = GoalItemDecoration(context)
+        addItemDecoration(itemDecoration)
+    }
+
+    override fun draw(c: Canvas?) {
+        super.draw(c)
+        invalidateItemDecorations()
     }
 }
 
@@ -64,7 +72,7 @@ class GoalViewAdapter(private val data: List<Goal>) : RecyclerView.Adapter<GoalV
 class GoalViewHolder(val goalView: GoalView) : RecyclerView.ViewHolder(goalView) {
 
     fun bind(goal: Goal) {
-        Log.i("GoalViewHolder","bind")
+//        Log.i("GoalViewHolder","bind")
         goalView.binding.goalStatus.text = GoalUtil.getStatus(goal).name
         goalView.binding.goalTitle.text = goal.goalContent
 
@@ -76,49 +84,53 @@ class GoalViewHolder(val goalView: GoalView) : RecyclerView.ViewHolder(goalView)
 }
 
 class GoalItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
-    var padding = context.resources.getDimensionPixelSize(R.dimen.margin_xsmall)
     override fun getItemOffsets(
         outRect: Rect,
         view: View,
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
-        super.getItemOffsets(outRect, view, parent, state)
 
-        view.viewTreeObserver.addOnGlobalLayoutListener(
-            object : OnGlobalLayoutListener {
-                override fun onGlobalLayout() {
-                    view.viewTreeObserver.removeOnGlobalLayoutListener(this)
+        val nowPosition = parent.getChildAdapterPosition(view)
 
-                    val layoutManager = parent.layoutManager
+//        Log.i("GoalItemDecoration", "decoration, now Position: ${nowPosition}")
 
-                    if ( layoutManager is GridLayoutManager) {
-                        val spanCount = layoutManager.spanCount
-                        val nowPosition = parent.getChildAdapterPosition(view)
-                        val margin =
-                            (parent.width - (view.width * spanCount)) / (spanCount - 1) / 2
-                        Log.i("margin", "recyclerview width ${parent.width}, view width ${view.width}, margin: ${margin}")
+        val layoutManager = parent.layoutManager
 
-                        if (nowPosition % spanCount == 0) {
-                            outRect.right = margin
-                        }else if (nowPosition % spanCount == spanCount - 1) {
-                            outRect.left = margin
-                        } else {
-                            outRect.right = margin
-                            outRect.left = margin
-                        }
+        if (layoutManager is GridLayoutManager) {
+//            Log.i("GoalItemDecoration", "GridLayoutManager, spancount: ${layoutManager.spanCount}")
 
-                        outRect.top = margin
-                        outRect.bottom = margin
-                    }
-                    else if(layoutManager is LinearLayoutManager){
-                        if(layoutManager.orientation == LinearLayoutManager.HORIZONTAL) outRect.bottom = 10
-                        else outRect.right = 10
-                    }
-                }
+            val spanCount = layoutManager.spanCount
+            val margin: Int =
+                (parent.width - view.resources.getDimension(R.dimen.goal_view_width).toInt() * spanCount) / (spanCount + 1) / 2
+//            Log.i("margin", "recyclerview width ${parent.width}, view width ${view.width}, margin: ${margin}")
+
+            if (nowPosition % spanCount == 0) {
+//                Log.i("margin", "right")
+                outRect.right = margin
+                outRect.left = margin*2
+            } else if (nowPosition % spanCount == spanCount - 1) {
+//                Log.i("margin", "left")
+                outRect.left = margin
+                outRect.right = margin*2
+            } else {
+//                Log.i("margin", "right/left")
+                outRect.right = margin
+                outRect.left = margin
             }
-        )
 
+            if (nowPosition < spanCount) {
+                outRect.top = margin*2
+            }
+            outRect.bottom = margin*2
 
+        } else if (layoutManager is LinearLayoutManager) {
+//            Log.i("GoalItemDecoration", "LinearLayoutManager")
+
+            if (layoutManager.orientation == LinearLayoutManager.HORIZONTAL) outRect.right = 10
+            else outRect.bottom = 10
+        }
+
+//        Log.i("margin", "Rect margin right: ${outRect.right}, left: ${outRect.left}, top: ${outRect.top}, bottom: ${outRect.bottom}")
     }
 }

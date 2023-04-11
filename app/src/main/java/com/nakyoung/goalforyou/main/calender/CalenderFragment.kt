@@ -43,7 +43,6 @@ class CalenderFragment : Fragment() {
             binding.calenderView.binding.month.text = calenderViewModel.month.name
 
             adapter = CalendarViewAdapter(calenderViewModel.days)
-
             var itemLongClickListener = object : CalendarViewAdapter.ItemLongClickListener {
                 override fun onItemLongClick(item: View, indexInDays: Int) {
                     Log.i("CalendarViewAdapter","Item onClick!")
@@ -51,7 +50,6 @@ class CalenderFragment : Fragment() {
                 }
             }
             adapter.setOnItemLongClickListener(itemLongClickListener)
-
             binding.calenderView.binding.calender.adapter = adapter
         }
 
