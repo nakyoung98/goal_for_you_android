@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
+import android.view.ViewTreeObserver.OnScrollChangedListener
 import android.view.WindowManager
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
@@ -49,10 +50,11 @@ class GoalProgressBar
             progressStatus
         }
 
-        binding.root.viewTreeObserver.addOnGlobalLayoutListener(
-            object : OnGlobalLayoutListener {
-                override fun onGlobalLayout() {
-                    binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
+        binding.root.viewTreeObserver.addOnScrollChangedListener(
+            object : OnScrollChangedListener {
+                override fun onScrollChanged() {
+                    binding.root.viewTreeObserver.removeOnScrollChangedListener(this)
+
                     width = binding.root.width
 
                     ConstraintSet().apply {
@@ -75,7 +77,6 @@ class GoalProgressBar
                             binding.progressStatus.setTextColor((binding.ongoingProgressBarStatus.background as ColorDrawable).color)
                         }
                         applyTo(binding.root)
-
                     }
                 }
             }

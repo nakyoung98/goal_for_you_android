@@ -26,7 +26,7 @@
             android:background="@drawable/calender_date_goal_square"
             android:backgroundTint="?attr/colorPrimary"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_middle"
             android:nestedScrollingEnabled="false"
             android:overScrollMode="never"

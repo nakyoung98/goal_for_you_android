@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/goal_view_width"
     android:layout_height="@dimen/goal_view_height"
-
-    android:background="@drawable/goal_dday_square"
-    android:backgroundTint="?attr/colorPrimaryContainer"
+    app:strokeWidth="0dp"
+    app:cardElevation="0dp"
+    android:background="@drawable/calender_date_goal_square"
+    app:cardBackgroundColor="?attr/colorPrimaryContainer"
+    android:clipChildren="true"
+    android:clipToOutline="true"
     >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/goal_status"
@@ -63,5 +70,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

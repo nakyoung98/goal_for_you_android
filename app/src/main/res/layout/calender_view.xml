@@ -31,12 +31,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/year" />
 
+
     <View
-        android:id="@+id/view2"
-        android:layout_width="0dp"
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="@dimen/margin_small"
         android:background="?android:attr/listDivider"
+        android:backgroundTint="?attr/colorOnPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/month" />
@@ -48,7 +50,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2" />
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/calender"

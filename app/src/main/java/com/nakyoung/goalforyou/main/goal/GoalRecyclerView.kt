@@ -2,6 +2,7 @@ package com.nakyoung.goalforyou.main.goal
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.Canvas
 import android.graphics.PixelFormat
 import android.graphics.Rect
@@ -12,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.view.WindowManager
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.GridLayoutManager
@@ -24,12 +26,9 @@ import com.nakyoung.goalforyou.view.GoalView
 
 
 class GoalRecyclerView
-    @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyle: Int = com.google.android.material.R.attr.recyclerViewStyle,
-        layoutManager: LayoutManager? = GridLayoutManager(context,1),
-        ): RecyclerView(context, attrs, defStyle) {
+ @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0, layoutManager: RecyclerView.LayoutManager? = GridLayoutManager(context,1),)
+    : ConstraintLayout(context, attrs, defStyleAttr, defStyleRes)
+ {
 
     val binding
         get() = _binding!!
@@ -37,33 +36,28 @@ class GoalRecyclerView
 
     var data: List<Goal>? = null
         set(value) {
-            adapter = GoalViewAdapter(value!!)
+            binding.goalRecyclerView.adapter = GoalViewAdapter(value!!)
             field = value}
 
-    val itemDecoration: ItemDecoration
+    val itemDecoration: RecyclerView.ItemDecoration
     init {
-        setLayoutManager(layoutManager)
-        _binding = RecyclerviewGoalBinding.inflate(LayoutInflater.from(context))
+        _binding = RecyclerviewGoalBinding.inflate(LayoutInflater.from(context),this,true)
+        binding.goalRecyclerView.layoutManager = layoutManager
         itemDecoration = GoalItemDecoration(context)
-        addItemDecoration(itemDecoration)
+        binding.goalRecyclerView.addItemDecoration(itemDecoration)
     }
 
-    override fun draw(c: Canvas?) {
-        super.draw(c)
-        invalidateItemDecorations()
-    }
+     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+         super.onSizeChanged(w, h, oldw, oldh)
+         val spanCount: Int = w / resources.getDimension(R.dimen.goal_view_width) .toInt()
+//         Log.i("GoalRecyclerView","onSizeChanged w:${w}, spancount:${spanCount}")
 
-    @SuppressLint("DrawAllocation")
-    override fun onMeasure(widthSpec: Int, heightSpec: Int) {
-        super.onMeasure(widthSpec, heightSpec)
-        Log.i("ONMEASURE","measure, measuredWidth: ${measuredWidth}, goalview width:${resources.getDimension(R.dimen.goal_view_width)}")
-        val spanCount: Int = measuredWidth / resources.getDimension(R.dimen.goal_view_width) .toInt()
+         when (binding.goalRecyclerView.layoutManager) {
+             is GridLayoutManager -> if(spanCount != (binding.goalRecyclerView.layoutManager as GridLayoutManager).spanCount )(binding.goalRecyclerView.layoutManager as GridLayoutManager).spanCount = spanCount
+         }
+         binding.goalRecyclerView.invalidateItemDecorations()
+     }
 
-        when (layoutManager) {
-            is GridLayoutManager -> if(spanCount != (layoutManager as GridLayoutManager).spanCount )(layoutManager as GridLayoutManager).spanCount = spanCount
-            is LinearLayoutManager -> layoutManager = GridLayoutManager(context, spanCount)
-        }
-    }
 }
 
 class GoalViewAdapter(private val data: List<Goal>) : RecyclerView.Adapter<GoalViewHolder>() {
@@ -85,7 +79,7 @@ class GoalViewAdapter(private val data: List<Goal>) : RecyclerView.Adapter<GoalV
 class GoalViewHolder(val goalView: GoalView) : RecyclerView.ViewHolder(goalView) {
 
     fun bind(goal: Goal) {
-//        Log.i("GoalViewHolder","bind")
+        Log.i("GoalViewHolder","bind")
         goalView.binding.goalStatus.text = GoalUtil.getStatus(goal).name
         goalView.binding.goalTitle.text = goal.goalContent
 
@@ -139,9 +133,9 @@ class GoalItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
 
         } else if (layoutManager is LinearLayoutManager) {
 //            Log.i("GoalItemDecoration", "LinearLayoutManager")
-
-            if (layoutManager.orientation == LinearLayoutManager.HORIZONTAL) outRect.right = 10
-            else outRect.bottom = 10
+            val margin: Int = view.resources.getDimension(R.dimen.margin_small).toInt()
+            if (layoutManager.orientation == LinearLayoutManager.HORIZONTAL) outRect.right = margin
+            else outRect.bottom = margin
         }
 
 //        Log.i("margin", "Rect margin right: ${outRect.right}, left: ${outRect.left}, top: ${outRect.top}, bottom: ${outRect.bottom}")

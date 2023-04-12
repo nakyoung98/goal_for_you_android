@@ -11,12 +11,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.material.card.MaterialCardView
 import com.nakyoung.goalforyou.R
 import com.nakyoung.goalforyou.databinding.GoalViewBinding
 
 class GoalView
 @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0)
-    : ConstraintLayout(context, attrs, defStyleAttr, defStyleRes)
+    : MaterialCardView(context, attrs, defStyleAttr)
 {
     val binding
         get() = _binding!!
@@ -25,6 +26,7 @@ class GoalView
 
     init {
         _binding = GoalViewBinding.inflate(LayoutInflater.from(context),this,true)
+        this.background = null
     }
 }
 

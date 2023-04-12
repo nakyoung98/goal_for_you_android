@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -54,8 +55,12 @@ class CalenderFragment : Fragment() {
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            binding.goalRecyclerView?.layoutManager = GridLayoutManager(requireContext(),2)
-            binding.goalRecyclerView?.data = goalsFromUser
+            binding.goalRecyclerView.binding.goalRecyclerViewTitle.apply {
+                setText(text.replaceRange(0,1, calenderViewModel.month.value.toString()))
+            }
+            binding.goalRecyclerView.binding.goalRecyclerViewTitle.visibility = View.VISIBLE
+            binding.goalRecyclerView.binding.goalRecyclerView.layoutManager = GridLayoutManager(requireContext(),2)
+            binding.goalRecyclerView.data = calenderViewModel.goalsInMonth
         }
     }
 }

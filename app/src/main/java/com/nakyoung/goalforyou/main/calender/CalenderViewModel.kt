@@ -11,8 +11,6 @@ import java.time.Month
 class CalenderViewModel
     : ViewModel() {
 
-    private val goals = goalsFromUser
-
     private val today = LocalDate.now().apply {
         Log.i("CalenderViewModel",this.toString())
     }
@@ -30,30 +28,41 @@ class CalenderViewModel
         )
     }
 
-    val days: List<Day> by lazy {
+    val goalsInMonth: ArrayList<Goal>
 
-        List<Day>(dayOfMonth) {
+    val days: List<Day>
+
+
+    init {
+
+        goalsInMonth = ArrayList<Goal>().apply {
+            for (goal in goalsFromUser) {
+                if (goal.goalInMonth(month.value)) {
+                    add(goal)
+                }
+            }
+        }
+        goalsInMonth.sortBy { it.goalStart }
+
+        days = List<Day>(dayOfMonth) { day ->
             //해당 날짜의 goal 담고
             val tempGoals = ArrayList<Goal>().apply {
-                for (goal in goals) {
-                    if (goal.goalInDate(LocalDate.of(today.year,today.month,it+1))) {
+                for (goal in goalsFromUser) {
+                    if (goal.goalInDate(LocalDate.of(year,month.value,day+1))) {
                         add(goal)
                     }
                 }
             }
+            tempGoals.sortBy { it.goalStart }
 
             //그 goal들을 포함해서 Day 객체 만들기.
-            Day(it+1,tempGoals.toList())
+            Day(day+1,tempGoals.toList())
         }
-    }
 
-
-    init {
         days.listIterator().forEach {
             Log.i("CalenderViewModel",it.toString())
         }
     }
-
 }
 
 class CalenderViewModelFactory(): ViewModelProvider.Factory{

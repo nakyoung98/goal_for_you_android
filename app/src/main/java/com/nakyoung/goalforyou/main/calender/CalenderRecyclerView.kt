@@ -39,11 +39,10 @@ class CalenderRecyclerView @JvmOverloads constructor(
         })
     }
 
-    override fun onDraw(c: Canvas?) {
-        super.onDraw(c)
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
         invalidateItemDecorations()
     }
-
 }
 
 class CalenderViewHolder(val cardView:CalenderDateCardview, val itemLongClickListener: CalendarViewAdapter.ItemLongClickListener? = null): RecyclerView.ViewHolder(cardView){
@@ -51,6 +50,10 @@ class CalenderViewHolder(val cardView:CalenderDateCardview, val itemLongClickLis
         if (day != null) {
             cardView.date = day.day
             cardView.addGoal(day.goals)
+
+            if (CalenderUtil.today.dayOfMonth == day.day) {
+                cardView.setBackgroundColor(cardView.resources.getColor(com.google.android.material.R.color.m3_ref_palette_error50))
+            }
         } else {
             cardView.isVisible = false
         }

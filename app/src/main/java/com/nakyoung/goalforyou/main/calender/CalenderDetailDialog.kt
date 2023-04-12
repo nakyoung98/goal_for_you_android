@@ -24,7 +24,7 @@ class CalenderDetailDialog( val indexIndays: Int
 
         lifecycleScope.launch {
             binding.day.text = calenderViewModel.days[indexIndays].day.toString()
-            binding.goalRecyclerView.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+            binding.goalRecyclerView.binding.goalRecyclerView.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
             binding.goalRecyclerView.data = calenderViewModel.days[indexIndays].goals
         }
         return AlertDialog.Builder(requireContext())
